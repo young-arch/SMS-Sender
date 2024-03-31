@@ -1,17 +1,18 @@
 package com.example.smsNexus.Controller;
+
 import com.example.smsNexus.Entity.UserProfile;
-import com.example.smsNexus.Repository.UserProfileR;
-import com.example.smsNexus.Service.UserProfileS;
+import com.example.smsNexus.Service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
 @RestController
 @RequestMapping("/api/user-profiles")
-public class UserProfileC {
+public class UserProfileController {
+
     @Autowired
-    private UserProfileS userProfileService;
+    private UserProfileService userProfileService;
 
     @GetMapping("/{username}")
     public ResponseEntity<UserProfile> getUserProfileByUsername(@PathVariable String username) {
@@ -25,7 +26,7 @@ public class UserProfileC {
 
     @PostMapping("/create")
     public ResponseEntity<UserProfile> createUserProfile(@RequestBody UserProfile userProfile) {
-        UserProfile createdUserProfile = userProfileService.save((UserProfileR) userProfile);
+        UserProfile createdUserProfile = userProfileService.save(userProfile);
         return new ResponseEntity<>(createdUserProfile, HttpStatus.CREATED);
     }
 
@@ -34,5 +35,4 @@ public class UserProfileC {
         userProfileService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }

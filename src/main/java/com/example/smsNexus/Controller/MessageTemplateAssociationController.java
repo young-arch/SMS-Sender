@@ -1,6 +1,7 @@
 package com.example.smsNexus.Controller;
+
 import com.example.smsNexus.Entity.MessageTemplateAssociation;
-import com.example.smsNexus.Service.MessageTemplateAssociationS;
+import com.example.smsNexus.Service.MessageTemplateAssociationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +10,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/message-template-associations")
-public class MessageTemplateAssociationC {
+public class MessageTemplateAssociationController {
     @Autowired
-    private MessageTemplateAssociationS messageTemplateAssociationService;
+    private MessageTemplateAssociationService messageTemplateAssociationService;
 
     @GetMapping("/template/{templateId}")
     public ResponseEntity<List<MessageTemplateAssociation>> getAssociationsByTemplateId(@PathVariable Long templateId) {
@@ -24,6 +25,4 @@ public class MessageTemplateAssociationC {
         List<MessageTemplateAssociation> associations = messageTemplateAssociationService.findByMobileNumber(mobileNumber);
         return new ResponseEntity<>(associations, HttpStatus.OK);
     }
-
-
 }

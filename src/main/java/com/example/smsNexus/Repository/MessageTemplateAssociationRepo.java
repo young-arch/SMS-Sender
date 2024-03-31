@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MessageTemplateAssociationR extends JpaRepository<MessageTemplateAssociationR, Long> {
+public interface MessageTemplateAssociationRepo extends JpaRepository<MessageTemplateAssociation, Long> {
     List<MessageTemplateAssociation> findByTemplateId(Long templateId);
     List<MessageTemplateAssociation> findByMobileNumber(String mobileNumber);
 }

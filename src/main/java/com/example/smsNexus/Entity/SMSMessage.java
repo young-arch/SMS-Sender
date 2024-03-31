@@ -14,7 +14,7 @@ public class SMSMessage {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_profile_id", nullable = false)
     private  UserProfile userProfile;
 
     @Column(nullable = false)
@@ -29,7 +29,7 @@ public class SMSMessage {
     @Column(nullable = false)
     private String status;
 
-    @Column(name = "reciepient_number", nullable = false)
+    @Column(name = "recipient_number", nullable = false)
     private String recipientNumber;
 
 }

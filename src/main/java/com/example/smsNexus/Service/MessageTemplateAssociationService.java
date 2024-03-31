@@ -1,17 +1,17 @@
 package com.example.smsNexus.Service;
 
 import com.example.smsNexus.Entity.MessageTemplateAssociation;
-import com.example.smsNexus.Repository.MessageTemplateAssociationR;
+import com.example.smsNexus.Repository.MessageTemplateAssociationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MessageTemplateAssociationS {
+public class MessageTemplateAssociationService {
 
     @Autowired
-    private MessageTemplateAssociationR messageTemplateAssociationRepository;
+    private MessageTemplateAssociationRepo messageTemplateAssociationRepository;
 
     public List<MessageTemplateAssociation> findByTemplateId(Long templateId) {
         return messageTemplateAssociationRepository.findByTemplateId(templateId);
@@ -21,8 +21,8 @@ public class MessageTemplateAssociationS {
         return messageTemplateAssociationRepository.findByMobileNumber(mobileNumber);
     }
 
-    public MessageTemplateAssociation save(MessageTemplateAssociationR association) {
-        return (MessageTemplateAssociation) messageTemplateAssociationRepository.save(association);
+    public MessageTemplateAssociation save(MessageTemplateAssociation association) {
+        return messageTemplateAssociationRepository.save(association);
     }
 
     public void deleteById(Long id) {

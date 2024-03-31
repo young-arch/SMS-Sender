@@ -8,11 +8,10 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
-public interface SMSMessageR extends JpaRepository<SMSMessageR, Long>{
+public interface SMSMessageRepo extends JpaRepository<SMSMessage, Long> {
     List<SMSMessage> findBySender(String sender);
     List<SMSMessage> findByRecipientNumber(String recipientNumber);
     List<SMSMessage> findByStatus(String status);
     List<SMSMessage> findBySenderAndStatus(String sender, String status);
-    List<SMSMessageR> findByTimestampBetween(Timestamp startTimestamp, Timestamp endTimestamp);
-
+    List<SMSMessage> findByTimestampBetween(Timestamp startTimestamp, Timestamp endTimestamp);
 }

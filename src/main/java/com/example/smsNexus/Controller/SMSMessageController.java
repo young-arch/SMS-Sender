@@ -1,8 +1,7 @@
 package com.example.smsNexus.Controller;
 
 import com.example.smsNexus.Entity.SMSMessage;
-import com.example.smsNexus.Repository.SMSMessageR;
-import com.example.smsNexus.Service.SMSMessageS;
+import com.example.smsNexus.Service.SMSMessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/sms-messages")
-public class SMSMessageC {
+public class SMSMessageController {
     @Autowired
-    private SMSMessageS smsMessageService;
+    private SMSMessageService smsMessageService;
 
     @GetMapping("/sender/{sender}")
     public ResponseEntity<List<SMSMessage>> getMessagesBySender(@PathVariable String sender) {
@@ -41,9 +39,10 @@ public class SMSMessageC {
         List<SMSMessage> messages = smsMessageService.findBySenderAndStatus(sender, status);
         return new ResponseEntity<>(messages, HttpStatus.OK);
     }
+
     @PostMapping("/create")
     public ResponseEntity<SMSMessage> createSMSMessage(@RequestBody SMSMessage smsMessage) {
-        SMSMessage createdMessage = smsMessageService.save((SMSMessageR) smsMessage);
+        SMSMessage createdMessage = smsMessageService.save(smsMessage);
         return new ResponseEntity<>(createdMessage, HttpStatus.CREATED);
     }
 
@@ -52,5 +51,4 @@ public class SMSMessageC {
         smsMessageService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
